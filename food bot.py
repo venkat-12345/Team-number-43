@@ -38,7 +38,7 @@ numbers={
         "ten":10
   }
 help_rules=[
-    "help","help!","help me","I didn't get","what","what?"
+    "help","help!","help me","what","what?"
     ]
 order_rules=[
     "get me a","get me the","get me","get","I would like to have","would like to" 
@@ -64,12 +64,13 @@ def print_order():
         total+=menu[reflections[dish]]['price']*num
     print("Your total is",total)
 def respond(message):
-    output="I did'nt get"
+    output="I did'nt get\n try help to get info"
     message=message.lower()
     for rule in order_rules:
         if rule in message:
             message=message[message.find(rule)+len(rule):]
             message=message.strip().split(" ")
+            k=1
             for i in message:
                 if i in numbers:
                     k=numbers[message.pop(message.index(i))]
@@ -100,6 +101,10 @@ def respond(message):
                 output="Is there any thing else I can do"
             else:
                 output="You haven't odderd anything yet"
+    for rule in help_rules:
+        if rule in message:
+            output='Guys I am here to help you make me help you\nTry using the target words\nTo order food:  Try words; get.get me,i would like to have\tNote: Please order one item at an instance\nTo get the info : Try words; price of ,cost of ,how much\nTo remove : Try words; remove,never mind,cancel\nTo get the bill: Try words ; my order ,my bill'
+
 
     return output
 def send_message():
@@ -111,24 +116,3 @@ print("Hi this is H.A.V.S \nI am named after the first letters of my creators \n
 print_menu()
 while(True):
     send_message()
-        
-
-"""
-    for rule in help_rules:
-        if rule in message:
-            print("Guys I am here to help you make me help you\nTry using the formate below to order somthing\n get (quantity) (dishname or code)\n to check you order 
-"""
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
