@@ -66,44 +66,51 @@ def print_order():
 def respond(message):
     output="I did'nt get\n try help to get info"
     message=message.lower()
-    for rule in order_rules:
-        if rule in message:
-            message=message[message.find(rule)+len(rule):]
-            message=message.strip().split(" ")
-            k=1
-            for i in message:
-                if i in numbers:
-                    k=numbers[message.pop(message.index(i))]
-            for i in message:
-                if reflections[i] in menu:
-                    order[i]=k
-                    output="Yes added to your order"
-    for rule in removal_rules:
-        if rule in message:
-            message=message[message.find(rule)+len(rule):]
-            message=message.strip().split(" ")
-            for i in message:
-                if reflections[i] in menu:
-                    k=order.pop(i)
-                    output="Yes done"
-    for rule in query_rules:
-        if rule in message:
-            message=message[message.find(rule)+len(rule):]
-            message=message.strip().split(" ")
-            for i in message:
-                if reflections[i] in menu:
-                    i=reflections[i]
-                    output= menu[i]["name"]+"is ₹"+str(menu[i]["price"])
-    for rule in bill_rules:
-        if rule in message:
-            if order:
-                print_order()
-                output="Is there any thing else I can do"
-            else:
-                output="You haven't odderd anything yet"
-    for rule in help_rules:
-        if rule in message:
-            output='Guys I am here to help you make me help you\nTry using the target words\nTo order food:  Try words; get.get me,i would like to have\tNote: Please order one item at an instance\nTo get the info : Try words; price of ,cost of ,how much\nTo remove : Try words; remove,never mind,cancel\nTo get the bill: Try words ; my order ,my bill'
+    if(message=="hi"):
+        output="Hello"
+    elif(message == "what is ur name" or "what is your name" or "who are you" or "what are you"):
+        output="As mentioned above my name is havs(H.A.V.S)\n Named after my creators first letters\n I am AI assistent to help you in ordering your food"
+    elif(message =="who created u"):
+        output="Harshitha,Adithya,Venkat,Sakshi"
+    else:
+        for rule in order_rules:
+            if rule in message:
+                message=message[message.find(rule)+len(rule):]
+                message=message.strip().split(" ")
+                k=1
+                for i in message:
+                    if i in numbers:
+                        k=numbers[message.pop(message.index(i))]
+                for i in message:
+                    if reflections[i] in menu:
+                        order[i]=k
+                        output="Yes added to your order"
+        for rule in removal_rules:
+            if rule in message:
+                message=message[message.find(rule)+len(rule):]
+                message=message.strip().split(" ")
+                for i in message:
+                    if reflections[i] in menu:
+                        k=order.pop(i)
+                        output="Yes done"
+        for rule in query_rules:
+            if rule in message:
+                message=message[message.find(rule)+len(rule):]
+                message=message.strip().split(" ")
+                for i in message:
+                    if reflections[i] in menu:
+                        i=reflections[i]
+                        output= menu[i]["name"]+"is ₹"+str(menu[i]["price"])
+        for rule in bill_rules:
+            if rule in message:
+                if order:
+                    print_order()
+                    output="Is there any thing else I can do"
+                else:
+                    output="You haven't odderd anything yet"
+        for rule in help_rules:
+            if rule in message:
+                output='Guys I am here to help you make me help you\nTry using the target words\nTo order food:  Try words; get,get me,i would like to have\tNote: Please order one item at an instance\nTo get the info : Try words; price of ,cost of ,how much\nTo remove : Try words; remove,never mind,cancel\nTo get the bill: Try words ; my order ,my bill'
 
 
     return output
